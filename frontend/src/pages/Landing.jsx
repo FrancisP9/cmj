@@ -149,7 +149,7 @@ const Footer = () => {
           <p className="small">© {new Date().getFullYear()} CMJ Health Care &amp; Beauty — Bruxelles</p>
           <p className="small">Rue du Pont Neuf 30, 1000 Bruxelles — T. {siteData.contact.phone_display}</p>
         </div>
-        <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect">Réserver maintenant</Button>
+        <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
       </div>
     </footer>
   );
