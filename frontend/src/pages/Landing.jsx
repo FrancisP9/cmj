@@ -16,7 +16,7 @@ const Header = () => {
           <a className="navigation-link" href="#reserver">Réserver &amp; Contact</a>
           <a className="navigation-link" href="#faq">FAQ</a>
         </nav>
-        <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect hidden sm:inline-flex">Réserver</Button>
+        <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold hidden sm:inline-flex">Réserver</Button>
       </div>
     </header>
   );
@@ -25,21 +25,19 @@ const Header = () => {
 const Hero = () => {
   const { hero, brand, contact } = siteData;
   return (
-    <section id="top" className="section">
-      <div className="container-aesop grid-two">
-        <div className="space-y-6">
-          <h1 className="text-4xl md:text-5xl leading-tight" style={{fontFamily:"Playfair Display"}}>{hero.title}</h1>
-          <p className="text-lg md:text-xl text-[color:var(--text-secondary)]">{hero.subtitle}</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
-            <a href="#prestations" className="btn-ghost">Voir les prestations</a>
+    <section id="top" className="section hero-bg" style={{ backgroundImage: `url(${hero.image})` }}>
+      <div className="overlay" />
+      <div className="content">
+        <div className="container-aesop">
+          <div className="max-w-3xl space-y-6">
+            <h1 className="text-4xl md:text-5xl leading-tight" style={{fontFamily:"Playfair Display"}}>{hero.title}</h1>
+            <p className="text-lg md:text-xl text-[color:var(--text-secondary)]">{hero.subtitle}</p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
+              <a href="#prestations" className="btn-ghost">Voir les prestations</a>
+            </div>
+            <p className="meta pt-4">{brand.name} — {brand.city} | {"Soins esthétiques personnalisés, ambiance sereine."} | {brand.address} | {contact.hours_short}</p>
           </div>
-          <p className="meta pt-4">{brand.name} — {brand.city} | {"Soins esthétiques personnalisés, ambiance sereine."} | {brand.address} | {contact.hours_short}</p>
-        </div>
-        <div className="relative">
-          {hero.image && (
-            <img src={hero.image} alt="Intérieur CMJ" className="w-full h-[420px] object-cover rounded-md shadow-sm" />
-          )}
         </div>
       </div>
     </section>
@@ -52,21 +50,39 @@ const Services = () => {
     <section id="prestations" className="section bg-[color:var(--bg-secondary)]">
       <div className="container-aesop">
         <h2 className="text-3xl mb-10" style={{fontFamily:"Playfair Display"}}><span className="cmj">Prestations</span> clés</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {siteData.services.map((s) => (
-            <Card key={s.id} className="card-minimal p-0">
-              <CardHeader className="pb-2">
-                <CardTitle className="font-normal text-lg">{s.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-[color:var(--text-secondary)]">
-                <p className="mb-4">{s.desc}</p>
-                <Button onClick={openBooking} className="rounded-none btn-rect w-full">{s.cta}</Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <div className="mt-8">
-          <a href="#reserver" className="btn-ghost">Voir toutes les prestations</a>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <Accordion type="single" collapsible className="w-full">
+            {siteData.serviceCategories.slice(0, Math.ceil(siteData.serviceCategories.length/2)).map((cat) => (
+              <AccordionItem key={cat.id} value={cat.id}>
+                <AccordionTrigger className="text-left">{cat.title}</AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm text-[color:var(--text-secondary)] mb-3">{cat.intro}</p>
+                  <ul className="list-disc pl-5 text-sm text-[color:var(--text-secondary)] space-y-1">
+                    {cat.items.map((it, idx) => (<li key={idx}>{it}</li>))}
+                  </ul>
+                  <div className="mt-4">
+                    <Button onClick={openBooking} className="rounded-none btn-rect w-auto">Réserver</Button>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+          <Accordion type="single" collapsible className="w-full">
+            {siteData.serviceCategories.slice(Math.ceil(siteData.serviceCategories.length/2)).map((cat) => (
+              <AccordionItem key={cat.id} value={cat.id}>
+                <AccordionTrigger className="text-left">{cat.title}</AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm text-[color:var(--text-secondary)] mb-3">{cat.intro}</p>
+                  <ul className="list-disc pl-5 text-sm text-[color:var(--text-secondary)] space-y-1">
+                    {cat.items.map((it, idx) => (<li key={idx}>{it}</li>))}
+                  </ul>
+                  <div className="mt-4">
+                    <Button onClick={openBooking} className="rounded-none btn-rect w-auto">Réserver</Button>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>
@@ -77,7 +93,7 @@ const BookingContact = () => {
   const { contact, booking } = siteData;
 
   const copy = async (text, label) => {
-    try { await navigator.clipboard.writeText(text); toast({ title: `${label} copié` }); } catch (e) { toast({ title: "Impossible de copier" }); }
+    try { await navigator.clipboard.writeText(text); toast("" + label + " copié"); } catch (e) { toast("Impossible de copier"); }
   };
 
   return (
@@ -87,7 +103,7 @@ const BookingContact = () => {
           <h2 className="text-3xl mb-6" style={{fontFamily:"Playfair Display"}}>Réservation &amp; Contact</h2>
           <p className="meta mb-6">Adresse : {contact.address || siteData.brand.address}. Horaires : {contact.hours_short}. Tél. {contact.phone_display} — {siteData.contact.email}</p>
           <div className="flex flex-wrap gap-4">
-            <Button onClick={() => window.open(booking.fresha, "_blank")} className="rounded-none btn-rect">Réserver (Fresha)</Button>
+            <Button onClick={() => window.open(booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver (Fresha)</Button>
             {booking.treatwell ? (
               <Button onClick={() => window.open(booking.treatwell, "_blank")} variant="outline" className="rounded-none btn-rect">Réserver (Treatwell)</Button>
             ) : (
