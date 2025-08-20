@@ -4,8 +4,7 @@ import { Button } from "../components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "../components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/ui/accordion";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../components/ui/tooltip";
-import { Toaster } from "../components/ui/sonner";
-import { toast } from "../hooks/use-toast";
+import { toast } from "sonner";
 
 const Header = () => {
   return (
