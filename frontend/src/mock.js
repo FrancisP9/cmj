@@ -23,14 +23,19 @@ export const siteData = {
   hero: {
     title: "Votre beauté, notre expertise — au cœur de Bruxelles",
     subtitle: "Soin personnalisé, techniques avancées, expérience sereine.",
-    image: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/l5geduws_gallery-4.jpg",
-    imageAlt: "Accueil & comptoir CMJ — intérieur"
+    collageMain: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/ei6l1c6s_gallery-2.jpg",
+    collageFloat: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/wd31zz00_IMG_0094.jpg"
   },
-  serviceCategories: [
+  gallery: [
+    "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/l5geduws_gallery-4.jpg",
+    "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/ei6l1c6s_gallery-2.jpg",
+    "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/wd31zz00_IMG_0094.jpg"
+  ],
+  services6: [
     {
       id: "electrolyse",
       title: "Électrolyse",
-      intro: "Précision bulbe par bulbe pour un résultat définitif.",
+      thumb: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/l5geduws_gallery-4.jpg",
       items: [
         "Poils résiduels/blonds/roux",
         "Petites zones (lèvre, menton, sourcils)",
@@ -40,7 +45,7 @@ export const siteData = {
     {
       id: "laser",
       title: "Épilation laser",
-      intro: "Technologie efficace pour de larges zones.",
+      thumb: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/ei6l1c6s_gallery-2.jpg",
       items: [
         "Visage (joues, lèvre, menton)",
         "Aisselles, maillot (classique/échancré/intégral)",
@@ -51,22 +56,22 @@ export const siteData = {
     {
       id: "soin-visage",
       title: "Soin du visage",
-      intro: "Protocoles ciblés selon l’état de peau.",
+      thumb: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/wd31zz00_IMG_0094.jpg",
       items: [
         "Nettoyage profond / anti‑imperfections",
         "Hydratant / peau sensible",
         "Éclat / anti‑taches",
         "Microdermabrasion / peeling doux",
         "Microneedling",
-        "Visage complet / zones ciblées (rides, pores, cicatrices d’acné)",
+        "Visage complet / zones ciblées",
         "Cou & décolleté",
-        "Protocoles en cure (3–6 séances)"
+        "Protocoles en cure (3–6)"
       ]
     },
     {
       id: "anti-age",
       title: "Soin anti‑âge",
-      intro: "Lissage, fermeté et glow durable.",
+      thumb: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/l5geduws_gallery-4.jpg",
       items: [
         "Fermeté / lissage rides",
         "Glow & revitalisation",
@@ -77,15 +82,25 @@ export const siteData = {
     {
       id: "massage",
       title: "Massage relaxant",
-      intro: "Détente profonde et relâchement des tensions.",
+      thumb: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/ei6l1c6s_gallery-2.jpg",
       items: [
         "Relaxant global / dos‑nuque‑épaules",
         "Deep tissue",
         "Drainage lymphatique",
         "(Option) Pré‑natal selon disponibilité"
       ]
+    },
+    {
+      id: "mains-pieds",
+      title: "Mains & Pieds",
+      thumb: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/wd31zz00_IMG_0094.jpg",
+      items: [
+        "Manucure classique",
+        "Pédicure esthétique",
+        "Vernis semi‑permanent",
+        "Beauté des pieds"
+      ]
     }
-    // 6e catégorie à confirmer (ex: Mains & Pieds). Nous l'ajouterons dès votre validation.
   ],
   faqs: [
     { q: "Laser vs Électrolyse — quelle différence ?", a: "Le laser traite rapidement de larges zones en ciblant la mélanine du poil ; l’électrolyse détruit le bulbe poil par poil, idéale pour les poils clairs ou résiduels." },
