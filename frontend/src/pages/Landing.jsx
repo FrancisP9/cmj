@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="header-glass">
       <div className="container-aesop flex items-center justify-between py-4">
-        <a href="#top" className="text-xl font-normal" style={{fontFamily:"Playfair Display"}}>CMJ Health Care &amp; Beauty</a>
+        <a href="#top" className="text-xl font-normal brand-mark" style={{fontFamily:"Playfair Display"}}><span className="cmj">CMJ</span><span className="hcab">Health Care &amp; Beauty</span></a>
         <nav className="hidden md:flex items-center gap-8">
           <a className="navigation-link" href="#prestations">Prestations</a>
           <a className="navigation-link" href="#reserver">Réserver &amp; Contact</a>
