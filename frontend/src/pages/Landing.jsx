@@ -31,7 +31,7 @@ const Hero = () => {
           <h1 className="text-4xl md:text-5xl leading-tight" style={{fontFamily:"Playfair Display"}}>{hero.title}</h1>
           <p className="text-lg md:text-xl text-[color:var(--text-secondary)]">{hero.subtitle}</p>
           <div className="flex flex-wrap items-center gap-4">
-            <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect">Réserver maintenant</Button>
+            <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
             <a href="#prestations" className="btn-ghost">Voir les prestations</a>
           </div>
           <p className="meta pt-4">{brand.name} — {brand.city} | {"Soins esthétiques personnalisés, ambiance sereine."} | {brand.address} | {contact.hours_short}</p>
