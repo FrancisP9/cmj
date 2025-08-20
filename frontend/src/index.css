@@ -2,85 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fonts are injected via public/index.html */
+
+:root {
+  --bg-primary: #fffef2; /* Warm white */
+  --bg-secondary: #f6f5e8; /* Light warm beige */
+  --bg-subtle: #ebeade; /* Warm gray */
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-light: #bcbbb4;
+  --interactive-base: #333333;
+  --interactive-hover: #000000;
+  --focus-outline: #252525;
+  --border-light: #bcbbb4;
+  --accent-gold: #C9A56A; /* hover accent only */
+}
+
+html, body, #root {
+  height: 100%;
+}
+
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-primary);
 }
 
+/************************
+ Layout utilities (Aesop)
+*************************/
+.container-aesop { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+.section-sm { padding: 72px 0; }
+.grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+@media (max-width: 1024px) { .grid-two { grid-template-columns: 1fr; gap: 40px; } .section { padding: 72px 0; } }
 
+.btn-rect {
+  border: 1px solid var(--interactive-base);
+  color: var(--interactive-base);
+  background: transparent;
+  border-radius: 0px;
+  padding: 16px 22px;
+  height: 54px;
+  min-width: 200px;
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn-rect:hover { background: var(--interactive-base); color: var(--bg-primary); border-color: var(--interactive-hover); }
+.btn-ghost { color: var(--interactive-base); border: none; background: transparent; padding: 8px 0; text-decoration: none; position: relative; }
+.btn-ghost:after { content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px; background: var(--interactive-base); transition: width .4s ease; }
+.btn-ghost:hover:after { width: 100%; }
 
+.card-minimal { background: var(--bg-primary); border: 1px solid rgba(51,51,51,0.08); border-radius: 8px; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; }
+.card-minimal:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+
+.header-glass { position: sticky; top: 0; z-index: 50; background: rgba(255,254,242,0.75); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(51,51,51,0.08); }
+
+.meta { color: var(--text-secondary); font-size: 14px; }
+.small { font-size: 12px; color: var(--text-light); }
+
+/* Avoid generic transitions on all elements to respect guidelines */
+
+/* Tailwind base theme alignment */
 @layer base {
   :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 98%;
-        --secondary: 0 0% 96.1%;
-        --secondary-foreground: 0 0% 9%;
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
-        --radius: 0.5rem;
-    }
-  .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
-    }
-}
-
-
-
-@layer base {
-  * {
-    @apply border-border;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
 }
