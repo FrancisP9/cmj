@@ -51,7 +51,7 @@ const Services = () => {
   return (
     <section id="prestations" className="section bg-[color:var(--bg-secondary)]">
       <div className="container-aesop">
-        <h2 className="text-3xl mb-10" style={{fontFamily:"Playfair Display"}}>Prestations clés</h2>
+        <h2 className="text-3xl mb-10" style={{fontFamily:"Playfair Display"}}><span className="cmj">Prestations</span> clés</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {siteData.services.map((s) => (
             <Card key={s.id} className="card-minimal p-0">
