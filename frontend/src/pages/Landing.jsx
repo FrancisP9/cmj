@@ -164,7 +164,6 @@ export default function Landing() {
       <BookingContact />
       <FAQ />
       <Footer />
-      <Toaster richColors />
     </div>
   );
 }
