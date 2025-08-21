@@ -101,3 +101,97 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+## user_problem_statement: "Build a conversion‑oriented landing for CMJ with Fresha booking only; add About; implement contact form + booking click tracking; fix frontend build error."
+
+## backend:
+  - task: "Leads API (create/list)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Implemented POST /api/leads and GET /api/leads with pydantic v2 models."
+  - task: "Booking click events API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Implemented POST /api/events/booking-click to store click source + href."
+
+## frontend:
+  - task: "Fix zodResolver import"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/ContactForm.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "Build failed: export 'zodResolver' not found from '@hookform/resolvers'."
+      - working: true
+        agent: "main"
+        comment: "Fixed import to '@hookform/resolvers/zod'."
+  - task: "Remove Treatwell references"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/mock.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "All CTAs now point to Fresha only."
+  - task: "Contact form integration"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/ContactForm.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Form posts to /api/leads; UI validated locally."
+  - task: "Click tracking integration"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Landing.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "CTAs send POST /api/events/booking-click."
+
+## metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+## test_plan:
+  current_focus:
+    - "Test POST /api/leads (valid + invalid payloads)"
+    - "Test GET /api/leads ordering and limit"
+    - "Test POST /api/events/booking-click with each source"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+## agent_communication:
+  - agent: "main"
+    message: "Backend endpoints added; please validate with curl against http://localhost:8001/api."
