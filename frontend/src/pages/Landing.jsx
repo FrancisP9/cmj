@@ -3,27 +3,25 @@ import { siteData } from "../mock";
 import { Button } from "../components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "../components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/ui/accordion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../components/ui/tooltip";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../components/ui/carousel";
 import { toast } from "sonner";
-import { Check } from "lucide-react";
+import { ContactForm } from "../components/ContactForm";
+import { trackBookingClick } from "../api/client";
 
-const Header = () => {
-  return (
-    <header className="header-glass">
-      <div className="container-aesop flex items-center justify-between py-4">
-        <a href="#top" className="text-xl font-normal brand-mark" style={{fontFamily:"Playfair Display"}}><span className="cmj">CMJ</span><span className="hcab">Health Care &amp; Beauty</span></a>
-        <nav className="hidden md:flex items-center gap-8">
-          <a className="navigation-link" href="#apropos">À propos</a>
-          <a className="navigation-link" href="#prestations">Prestations</a>
-          <a className="navigation-link" href="#reserver">Réserver &amp; Contact</a>
-          <a className="navigation-link" href="#faq">FAQ</a>
-        </nav>
-        <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold hidden sm:inline-flex">Réserver</Button>
-      </div>
-    </header>
-  );
-};
+const Header = () => (
+  <header className="header-glass">
+    <div className="container-aesop flex items-center justify-between py-4">
+      <a href="#top" className="text-xl font-normal brand-mark" style={{fontFamily:"Playfair Display"}}><span className="cmj">CMJ</span><span className="hcab">Health Care &amp; Beauty</span></a>
+      <nav className="hidden md:flex items-center gap-8">
+        <a className="navigation-link" href="#apropos">À propos</a>
+        <a className="navigation-link" href="#prestations">Prestations</a>
+        <a className="navigation-link" href="#reserver">Réserver &amp; Contact</a>
+        <a className="navigation-link" href="#faq">FAQ</a>
+      </nav>
+      <Button onClick={() => { trackBookingClick({source:'header', href: siteData.booking.fresha}); window.open(siteData.booking.fresha, "_blank"); }} className="rounded-none btn-rect btn-rect--gold hidden sm:inline-flex">Réserver</Button>
+    </div>
+  </header>
+);
 
 const Hero = () => {
   const { hero, brand, contact } = siteData;
@@ -35,7 +33,7 @@ const Hero = () => {
           <h1 className="text-4xl md:text-5xl leading-tight" style={{fontFamily:"Playfair Display"}}>{hero.title}</h1>
           <p className="text-lg md:text-xl text-[color:var(--text-secondary)]">{hero.subtitle}</p>
           <div className="flex flex-wrap items-center gap-4">
-            <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
+            <Button onClick={() => { trackBookingClick({source:'hero', href: siteData.booking.fresha}); window.open(siteData.booking.fresha, "_blank"); }} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
             <a href="#prestations" className="btn-ghost">Voir les prestations</a>
           </div>
           <p className="meta pt-2">{brand.name} — {brand.city} | {"Soins esthétiques personnalisés, ambiance sereine."} | {brand.address} | {contact.hours_short}</p>
@@ -53,27 +51,25 @@ const Hero = () => {
   );
 };
 
-const GalleryStrip = () => {
-  return (
-    <section className="gallery-strip">
-      <div className="container-aesop">
-        <Carousel opts={{ align: "start", loop: true }} className="relative">
-          <CarouselContent>
-            {siteData.gallery.map((src, idx) => (
-              <CarouselItem key={idx} className="basis-2/3 md:basis-1/3">
-                <div className="gallery-img h-[200px] md:h-[260px]">
-                  <img src={src} alt={`Galerie ${idx+1}`} className="w-full h-full object-cover" />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="-left-6" />
-          <CarouselNext className="-right-6" />
-        </Carousel>
-      </div>
-    </section>
-  );
-};
+const GalleryStrip = () => (
+  <section className="gallery-strip">
+    <div className="container-aesop">
+      <Carousel opts={{ align: "start", loop: true }} className="relative">
+        <CarouselContent>
+          {siteData.gallery.map((src, idx) => (
+            <CarouselItem key={idx} className="basis-2/3 md:basis-1/3">
+              <div className="gallery-img h-[200px] md:h-[260px]">
+                <img src={src} alt={`Galerie ${idx+1}`} className="w-full h-full object-cover" />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="-left-6" />
+        <CarouselNext className="-right-6" />
+      </Carousel>
+    </div>
+  </section>
+);
 
 const AboutSection = () => {
   const { about } = siteData;
@@ -86,13 +82,13 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {about.bullets.map((b, i) => (
               <div key={i} className="flex items-start gap-3">
-                <span className="mt-1 text-[color:var(--accent-gold)]"><Check size={16} /></span>
+                <span className="mt-1 text-[color:var(--accent-gold)]">•</span>
                 <p className="text-sm text-[color:var(--text-secondary)]">{b}</p>
               </div>
             ))}
           </div>
           <div className="pt-2 flex gap-4">
-            <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver</Button>
+            <Button onClick={() => { trackBookingClick({source:'about', href: siteData.booking.fresha}); window.open(siteData.booking.fresha, "_blank"); }} className="rounded-none btn-rect btn-rect--gold">Réserver</Button>
             <a href="#prestations" className="btn-ghost">Voir les prestations</a>
           </div>
         </div>
@@ -107,7 +103,7 @@ const AboutSection = () => {
 };
 
 const Services = () => {
-  const openBooking = () => window.open(siteData.booking.fresha, "_blank");
+  const openBooking = () => { trackBookingClick({source:'services', href: siteData.booking.fresha}); window.open(siteData.booking.fresha, "_blank"); };
   return (
     <section id="prestations" className="section bg-[color:var(--bg-secondary)]">
       <div className="container-aesop">
@@ -142,19 +138,7 @@ const BookingContact = () => {
           <h2 className="text-3xl mb-6" style={{fontFamily:"Playfair Display"}}>Réservation &amp; Contact</h2>
           <p className="meta mb-6">Adresse : {contact.address || siteData.brand.address}. Horaires : {contact.hours_short}. Tél. {contact.phone_display} — {siteData.contact.email}</p>
           <div className="flex flex-wrap gap-4">
-            <Button onClick={() => window.open(booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver (Fresha)</Button>
-            {booking.treatwell ? (
-              <Button onClick={() => window.open(booking.treatwell, "_blank")} variant="outline" className="rounded-none btn-rect">Réserver (Treatwell)</Button>
-            ) : (
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button disabled className="rounded-none btn-rect opacity-70">Treatwell (bientôt)</Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Partagez le lien Treatwell pour l’activer</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            )}
+            <Button onClick={() => { trackBookingClick({source:'booking', href: booking.fresha}); window.open(booking.fresha, "_blank"); }} className="rounded-none btn-rect btn-rect--gold">Réserver (Fresha)</Button>
             <Button onClick={() => copy(siteData.contact.phone_tel, "Numéro")} variant="outline" className="rounded-none btn-rect">Copier tél.</Button>
             <Button onClick={() => copy(siteData.contact.email, "Email")} variant="outline" className="rounded-none btn-rect">Copier e‑mail</Button>
           </div>
@@ -165,9 +149,10 @@ const BookingContact = () => {
           </div>
         </div>
         <div>
-          <div className="w-full h-[360px] overflow-hidden rounded-md border border-[color:var(--border-light)]">
+          <div className="w-full h-[360px] overflow-hidden rounded-md border border-[color:var(--border-light)] mb-6">
             <iframe title="Carte CMJ" width="100%" height="100%" style={{border:0}} loading="lazy" allowFullScreen src={`https://www.google.com/maps?q=${encodeURIComponent(siteData.contact.maps_q)}&output=embed`}></iframe>
           </div>
+          <ContactForm />
         </div>
       </div>
     </section>
@@ -197,7 +182,7 @@ const Footer = () => (
         <p className="small">© {new Date().getFullYear()} CMJ Health Care &amp; Beauty — Bruxelles</p>
         <p className="small">Rue du Pont Neuf 30, 1000 Bruxelles — T. {siteData.contact.phone_display}</p>
       </div>
-      <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
+      <Button onClick={() => { trackBookingClick({source:'footer', href: siteData.booking.fresha}); window.open(siteData.booking.fresha, "_blank"); }} className="rounded-none btn-rect btn-rect--gold">Réserver maintenant</Button>
     </div>
   </footer>
 );
