@@ -26,6 +26,17 @@ export const siteData = {
     collageMain: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/ei6l1c6s_gallery-2.jpg",
     collageFloat: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/wd31zz00_IMG_0094.jpg"
   },
+  about: {
+    title: "À propos",
+    lead: "Institut indépendant au centre de Bruxelles, CMJ propose des soins esthétiques personnalisés dans une atmosphère sereine, avec des techniques avancées (laser & électrolyse) et une hygiène irréprochable.",
+    bullets: [
+      "Approche sur‑mesure et conseils honnêtes",
+      "Technologies éprouvées & protocoles ciblés",
+      "Hygiène stricte et confort de soin",
+      "Réservation simple en ligne",
+    ],
+    image: "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/l5geduws_gallery-4.jpg",
+  },
   gallery: [
     "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/l5geduws_gallery-4.jpg",
     "https://customer-assets.emergentagent.com/job_brussels-beauty-cmj/artifacts/ei6l1c6s_gallery-2.jpg",

@@ -6,6 +6,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "..
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../components/ui/tooltip";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../components/ui/carousel";
 import { toast } from "sonner";
+import { Check } from "lucide-react";
 
 const Header = () => {
   return (
@@ -13,6 +14,7 @@ const Header = () => {
       <div className="container-aesop flex items-center justify-between py-4">
         <a href="#top" className="text-xl font-normal brand-mark" style={{fontFamily:"Playfair Display"}}><span className="cmj">CMJ</span><span className="hcab">Health Care &amp; Beauty</span></a>
         <nav className="hidden md:flex items-center gap-8">
+          <a className="navigation-link" href="#apropos">À propos</a>
           <a className="navigation-link" href="#prestations">Prestations</a>
           <a className="navigation-link" href="#reserver">Réserver &amp; Contact</a>
           <a className="navigation-link" href="#faq">FAQ</a>
@@ -68,6 +70,37 @@ const GalleryStrip = () => {
           <CarouselPrevious className="-left-6" />
           <CarouselNext className="-right-6" />
         </Carousel>
+      </div>
+    </section>
+  );
+};
+
+const AboutSection = () => {
+  const { about } = siteData;
+  return (
+    <section id="apropos" className="section">
+      <div className="container-aesop grid-two">
+        <div className="space-y-6">
+          <h2 className="text-3xl" style={{fontFamily:"Playfair Display"}}><span className="cmj">{about.title}</span></h2>
+          <p className="text-[color:var(--text-secondary)] text-lg">{about.lead}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {about.bullets.map((b, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="mt-1 text-[color:var(--accent-gold)]"><Check size={16} /></span>
+                <p className="text-sm text-[color:var(--text-secondary)]">{b}</p>
+              </div>
+            ))}
+          </div>
+          <div className="pt-2 flex gap-4">
+            <Button onClick={() => window.open(siteData.booking.fresha, "_blank")} className="rounded-none btn-rect btn-rect--gold">Réserver</Button>
+            <a href="#prestations" className="btn-ghost">Voir les prestations</a>
+          </div>
+        </div>
+        <div>
+          <div className="photo-card" style={{height: "420px"}}>
+            <img src={about.image} alt="À propos de CMJ — intérieur" />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -175,6 +208,7 @@ export default function Landing() {
       <Header />
       <Hero />
       <GalleryStrip />
+      <AboutSection />
       <Services />
       <BookingContact />
       <FAQ />
