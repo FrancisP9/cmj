@@ -52,6 +52,31 @@ class BookingClickIn(BaseModel):
     href: str
 
 
+
+class BookingClick(BookingClickIn):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+# Leads endpoints
+@api_router.post("/leads", response_model=Lead, status_code=201)
+async def create_lead(payload: LeadIn):
+    doc = Lead(**payload.dict())
+    await db.leads.insert_one(doc.dict())
+    return doc
+
+@api_router.get("/leads", response_model=List[Lead])
+async def list_leads(limit: int = 100):
+    cursor = db.leads.find().sort("created_at", -1).limit(limit)
+    items = await cursor.to_list(length=limit)
+    return [Lead(**i) for i in items]
+
+# Booking click events
+@api_router.post("/events/booking-click", response_model=BookingClick, status_code=201)
+async def create_booking_click(payload: BookingClickIn):
+    doc = BookingClick(**payload.dict())
+    await db.booking_clicks.insert_one(doc.dict())
+    return doc
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
