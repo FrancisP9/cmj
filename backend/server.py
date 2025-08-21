@@ -35,6 +35,26 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+
+# Lead and BookingClick models
+class LeadIn(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    message: str
+
+class Lead(LeadIn):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class BookingClickIn(BaseModel):
+    source: Literal['header','hero','services','about','booking','footer']
+    href: str
+
+class BookingClick(BookingClickIn):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
